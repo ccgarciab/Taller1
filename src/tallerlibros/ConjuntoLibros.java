@@ -10,5 +10,19 @@ package tallerlibros;
  * @author ESTUDIANTE
  */
 public class ConjuntoLibros {
+
+    public int getNumeroLibros() {
+        return numeroLibros;
+    }
+
+    public Libro getLibro(int index) {
+        return libros[index];
+    }
+
+    public ConjuntoLibros(int numeroLibros) {
+        this.numeroLibros = numeroLibros;
+    }
+    private int numeroLibros;
+    private Libro libros[]=new Libro [numeroLibros];
     
 }
