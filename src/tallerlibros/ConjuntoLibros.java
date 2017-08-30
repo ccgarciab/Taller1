@@ -33,8 +33,19 @@ public class ConjuntoLibros {
     return exito;
     }
     
-    //correrLibros elimina los espacios vacios entre los libros, dejandolos todos al final del arreglo
-   
+    public void printInformaciónColeccion(){
+        System.out.println("Numero de libros en la coleccion: "+this.librosGuardados);
+        System.out.println("Espacio en la coleccion: "+(this.numeroLibros-this.librosGuardados)+" libros");
+        System.out.println('\n');
+        for(int i=0; i<librosGuardados; ++i){
+            System.out.println("Libro "+i);
+            System.out.println("Titulo: "+this.libros[i].getTitulo());
+            System.out.println("Autor: "+this.libros[i].getTitulo());
+            System.out.println("Numero de paginas: "+this.libros[i].getNumeroPaginas());
+            System.out.println("Calificacion: "+this.libros[i].getCalificacion());
+            System.out.println('\n');
+        }
+    }
     
     public Libro[] getPeoresLibros(){
         Libro tempLibro=null;
