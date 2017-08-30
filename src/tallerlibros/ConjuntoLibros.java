@@ -35,7 +35,14 @@ public class ConjuntoLibros {
     
     //correrLibros elimina los espacios vacios entre los libros, dejandolos todos al final del arreglo
     public void correrLibros(){
-    
+        for(int i=0; i<this.numeroLibros; ++i){
+            if(this.libros[i].equals(null)){
+                for(int j=i; j<this.numeroLibros; ++j){
+                    if(this.libros[j]!=null)
+                        this.libros[i]=this.libros[j];
+                }
+            }
+        }
     }
     
     private int numeroLibros;
