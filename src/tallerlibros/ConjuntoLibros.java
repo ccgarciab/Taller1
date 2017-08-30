@@ -16,7 +16,10 @@ public class ConjuntoLibros {
     }
 
     public Libro getLibro(int index) {
-        return libros[index];
+        if(index<numeroLibros)
+            return libros[index];
+        else
+            return null;
     }
 
     public ConjuntoLibros(int numeroLibros) {
