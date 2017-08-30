@@ -94,6 +94,44 @@ public class ConjuntoLibros {
     }
     
     
+    public boolean eliminarLibrosNombre(Libro nombre){
+        boolean exito=false;
+        for(int i=0; i<librosGuardados;i++){
+        if(this.libros[i].getTitulo().equals(nombre)){
+            this.libros[i]=null;   
+            exito=true;
+        }
+        }
+        for(int i=librosGuardados; i>=0;i--){
+            if(this.libros[i].equals(null)){
+                this.libros[i]=this.libros[i+1];
+                this.libros[i+1]=null;
+            libroborrado++;
+            }
+        }
+        librosGuardados-=libroborrado;
+        return exito;
+    }
+    
+    public boolean eliminarLibrosAutor(Libro autor){
+        boolean exito=false;
+        for(int i=0; i<librosGuardados;i++){
+        if(this.libros[i].getAutor().equals(autor)){
+            this.libros[i]=null;   
+            exito=true;
+        }
+        }
+        for(int i=librosGuardados; i>=0;i--){
+            if(this.libros[i].equals(null)){
+                this.libros[i]=this.libros[i+1];
+                this.libros[i+1]=null;
+            libroborrado++;
+            }
+        }
+        librosGuardados-=libroborrado;
+        return exito;
+    }
+    private int libroborrado=0;
     private int numeroLibros;
     private int librosGuardados;
     private Libro libros[]=new Libro [numeroLibros];
