@@ -26,10 +26,10 @@ public class ConjuntoLibros {
         this.numeroLibros = numeroLibros;
     }
             
-    public boolean agregarLibro(Libro volumen){
+    public boolean agregarLibro(nuevoLibro){
     boolean exito=false;
     if(this.librosGuardados<this.numeroLibros){
-        this.libros[librosGuardados]=volumen;
+        this.libros[librosGuardados]=nuevoLibro;
         librosGuardados=librosGuardados+1;
         exito=true;
     }
@@ -43,7 +43,7 @@ public class ConjuntoLibros {
         for(int i=0; i<librosGuardados; ++i){
             System.out.println("Libro "+i);
             System.out.println("Titulo: "+this.libros[i].getTitulo());
-            System.out.println("Autor: "+this.libros[i].getTitulo());
+            System.out.println("Autor: "+this.libros[i].getAutor());
             System.out.println("Numero de paginas: "+this.libros[i].getNumeroPaginas());
             System.out.println("Calificacion: "+this.libros[i].getCalificacion());
             System.out.println('\n');
