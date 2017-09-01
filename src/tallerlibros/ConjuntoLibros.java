@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tallerlibros;
 
-/**
- *
- * @author ESTUDIANTE
- */
 public class ConjuntoLibros {
 
+    private int numeroLibros=20;
+    private int librosGuardados=0;
+    private Libro libros[]=new Libro [numeroLibros];
+    
     public int getNumeroLibros() {
         return numeroLibros;
     }
@@ -26,22 +21,22 @@ public class ConjuntoLibros {
         this.numeroLibros = numeroLibros;
     }
             
-    public boolean agregarLibro(nuevoLibro){
+    public boolean agregarLibro(Libro volumen){
     boolean exito=false;
     if(this.librosGuardados<this.numeroLibros){
-        this.libros[librosGuardados]=nuevoLibro;
+        this.libros[librosGuardados]=volumen;
         librosGuardados=librosGuardados+1;
         exito=true;
     }
     return exito;
     }
     
-    public void printInformaciónColeccion(){
+    public void getprintInformaciónColeccion(){
         System.out.println("Numero de libros en la coleccion: "+this.librosGuardados);
         System.out.println("Espacio en la coleccion: "+(this.numeroLibros-this.librosGuardados)+" libros");
         System.out.println('\n');
         for(int i=0; i<librosGuardados; ++i){
-            System.out.println("Libro "+i);
+            System.out.println("Libro "+(i+1));
             System.out.println("Titulo: "+this.libros[i].getTitulo());
             System.out.println("Autor: "+this.libros[i].getAutor());
             System.out.println("Numero de paginas: "+this.libros[i].getNumeroPaginas());
@@ -50,54 +45,63 @@ public class ConjuntoLibros {
         }
     }
     
-    public Libro[] getPeoresLibros(){
+    
+    public void getPeoresLibros(){
         Libro tempLibro=null;
         int calificacion=10;
         int numeroDePeores=0;
-        Libro peoresLibros[]=new Libro[numeroDePeores];
-        for(int i=0; i<numeroLibros; ++i){
+        int j=0;
+        Libro peoresLibros[]=new Libro[librosGuardados];
+        if(librosGuardados>0){
+        for(int i=0; i<librosGuardados; ++i){
             if(this.libros[i].getCalificacion()<calificacion){
              calificacion=this.libros[i].getCalificacion();
             }
         }
-        for(int i=0; i<numeroLibros; ++i){
+         for(int i=0; i<librosGuardados; i++){
             if(this.libros[i].getCalificacion()==calificacion){
-             numeroDePeores=numeroDePeores+1;
+             peoresLibros[j]=this.libros[i];
+             numeroDePeores++;
+             j++;
             }
         }
-        for(int i=0; i<numeroLibros; ++i){
-            if(this.libros[i].getCalificacion()==calificacion){
-             peoresLibros[i]=this.libros[i];
-            }
+        
+        for(int i=0; i<numeroDePeores; i++){
+            System.out.println((i+1)+". libro: "+peoresLibros[i].getTitulo()+" calificacion: "+calificacion);
         }
-        return peoresLibros;
     }
-    
-    public Libro[] getMejoresLibros(){
+        else System.out.println("no hay libros");
+    }
+    public void getMejoresLibros(){
         Libro tempLibro=null;
         int calificacion=0;
-        int numeroDeMejores=0;
-        Libro mejoresLibros[]=new Libro[numeroDeMejores];
-        for(int i=0; i<numeroLibros; ++i){
+        int numeroDeMejores=1;
+        int j=0;
+        Libro mejoresLibros[]=new Libro[librosGuardados];
+        if (librosGuardados>0) {
+        for(int i=0; i<librosGuardados; i++){
             if(this.libros[i].getCalificacion()>calificacion){
              calificacion=this.libros[i].getCalificacion();
+             
             }
         }
-        for(int i=0; i<numeroLibros; ++i){
+        for(int i=0; i<librosGuardados; i++){
             if(this.libros[i].getCalificacion()==calificacion){
-             numeroDeMejores=numeroDeMejores+1;
+             mejoresLibros[j]=this.libros[i];
+             numeroDeMejores++;
+             j++;
             }
         }
-        for(int i=0; i<numeroLibros; ++i){
-            if(this.libros[i].getCalificacion()==calificacion){
-             mejoresLibros[i]=this.libros[i];
-            }
+        
+        for(int i=0; i<j;i++){
+            System.out.println((i+1)+". libro: "+mejoresLibros[i].getTitulo()+" calificacion: "+calificacion);
+                    
         }
-        return mejoresLibros;
     }
-    
-    
-    public boolean eliminarLibrosNombre(Libro nombre){
+        else System.out.println("no hay libros");
+    }
+    public boolean eliminarLibrosNombre(String nombre){
+        int libroborrado=0;
         boolean exito=false;
         for(int i=0; i<librosGuardados;i++){
         if(this.libros[i].getTitulo().equals(nombre)){
@@ -105,39 +109,44 @@ public class ConjuntoLibros {
             exito=true;
         }
         }
-        for(int i=librosGuardados; i>=0;i--){
-            if(this.libros[i].equals(null)){
-                this.libros[i]=this.libros[i+1];
-                this.libros[i+1]=null;
-            libroborrado++;
+        
+        
+        for (int i = 0; i < librosGuardados; i++) {
+            if(this.libros[i]==null){
+                libroborrado++;
+            }
+            if(i>0){
+            if (this.libros[i]!=null&&this.libros[i-1]==null){
+                this.libros[i-libroborrado]=this.libros[i];
+                this.libros[i]=null;
             }
         }
-        librosGuardados-=libroborrado;
+        }librosGuardados-=libroborrado;
         return exito;
     }
     
-    public boolean eliminarLibrosAutor(Libro autor){
+    public boolean eliminarLibrosAutor(String autor){
+       int libroborrado=0;
         boolean exito=false;
+        
         for(int i=0; i<librosGuardados;i++){
         if(this.libros[i].getAutor().equals(autor)){
             this.libros[i]=null;   
             exito=true;
         }
         }
-        for(int i=librosGuardados; i>=0;i--){
-            if(this.libros[i].equals(null)){
-                this.libros[i]=this.libros[i+1];
-                this.libros[i+1]=null;
-            libroborrado++;
+      for (int i = 0; i < librosGuardados; i++) {
+            if(this.libros[i]==null){libroborrado++;
+            }
+            if(i>0){
+            if (this.libros[i]!=null&&this.libros[i-1]==null){
+                this.libros[i-libroborrado]=this.libros[i];
+                this.libros[i]=null;
             }
         }
-        librosGuardados-=libroborrado;
+        }librosGuardados-=libroborrado;
         return exito;
     }
-    private int libroborrado=0;
-    private int numeroLibros;
-    private int librosGuardados;
-    private Libro libros[]=new Libro [numeroLibros];
       
 
 }
